@@ -18,7 +18,7 @@ def create_app(test_config=None):
 
     #ensure the instance folder exists
     try:
-        os.makdir(app.instance_path)
+        os.makedirs(app.instance_path)
     except OSError:
         pass
 
@@ -26,5 +26,8 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'hello, world!'
+
+    from . import db
+    db.init_app(app)
 
     return app
