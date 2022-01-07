@@ -18,22 +18,22 @@ def get_db():
 def init_db():
     db = get_db()
 
-    with current_app.open-resource('schema.sql') as f:
+    with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 
 @click.command('init-db')
 @with_appcontext
-def init_db-command():
+def init_db_command():
     """Clear the existing data dn create new table."""
     init_db()
     click.echo('Initialized the database')
 
 def init_app(app):
-    app.teardown_appcontext(close-db)
+    app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
 
-def close-db(e=None):
+def close_db(e=None):
     db = g.pop('db', None)
 
     if db is not None:
